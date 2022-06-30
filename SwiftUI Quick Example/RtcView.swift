@@ -22,7 +22,7 @@ struct RemoteRtcView: UIViewRepresentable {
     }
 
     func updateUIView(_ uiView: UIView, context: Context) {
-        rtcManager.setupCanvasForRemote(uiView, uid)
+        // noop
     }
 }
 
@@ -39,6 +39,6 @@ struct LocalRtcView: UIViewRepresentable {
     }
 
     func updateUIView(_ uiView: UIView, context: Context) {
-        rtcManager.setupCanvasForLocal(uiView, uid)
+        // noop
     }
 }
