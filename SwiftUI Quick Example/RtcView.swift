@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 import AgoraRtcKit
 
-struct RtcView: UIViewRepresentable {
+struct RemoteRtcView: UIViewRepresentable {
     @EnvironmentObject private var rtcManager: RTCManager
     let uid: UInt
 
@@ -17,11 +17,28 @@ struct RtcView: UIViewRepresentable {
 
     func makeUIView(context: Context) -> UIView {
         let view  = UIView()
-        rtcManager.setupCanvasFor(view, uid)
+        rtcManager.setupCanvasForRemote(view, uid)
         return view
     }
 
     func updateUIView(_ uiView: UIView, context: Context) {
-        rtcManager.setupCanvasFor(uiView, uid)
+        rtcManager.setupCanvasForRemote(uiView, uid)
+    }
+}
+
+struct LocalRtcView: UIViewRepresentable {
+    @EnvironmentObject private var rtcManager: RTCManager
+    let uid: UInt
+
+    typealias UIViewType = UIView
+
+    func makeUIView(context: Context) -> UIView {
+        let view  = UIView()
+        rtcManager.setupCanvasForLocal(view, uid)
+        return view
+    }
+
+    func updateUIView(_ uiView: UIView, context: Context) {
+        rtcManager.setupCanvasForLocal(uiView, uid)
     }
 }

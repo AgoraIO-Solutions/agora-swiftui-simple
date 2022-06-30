@@ -12,17 +12,34 @@ struct ContentView: View {
     var body: some View {
         GeometryReader { geo in
             let smallest = min(geo.size.height, geo.size.width) - 10
-            List(rtcManager.sortedUids, id: \.self) { uid in
-                    RtcView(uid: uid)
-                        .frame(width: smallest, height: smallest, alignment: .center)
-                        .listRowInsets(.init())
-                        .padding(5)
+            let modifier = RtcViewModifier(dimension: smallest)
+            List {
+                if rtcManager.myUid != 0 {
+                    LocalRtcView(uid: rtcManager.myUid)
+                        .modifier(modifier)
+                }
 
+                ForEach(rtcManager.sortedUids, id: \.self) { uid in
+                    RemoteRtcView(uid: uid)
+                        .modifier(modifier)
+                }
             }
             .listStyle(PlainListStyle())
             .listRowSeparator(.hidden)
         }
     }
+}
+
+private struct RtcViewModifier: ViewModifier {
+    let dimension: CGFloat
+    func body(content: Content) -> some View {
+        content
+            .frame(width: dimension, height: dimension, alignment: .center)
+            .listRowInsets(.init())
+            .padding(5)
+
+    }
+
 }
 
 struct ContentView_Previews: PreviewProvider {

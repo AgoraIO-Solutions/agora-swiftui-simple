@@ -13,7 +13,7 @@ import AgoraRtcKit
 class RTCManager: NSObject, ObservableObject {
     private let logger = Logger(subsystem: "io.agora.SwiftUI-Quick-Example", category: "RTCManager")
     private(set) var engine: AgoraRtcEngineKit!
-    @Published var uids: Set<UInt> = [] {
+    private var uids: Set<UInt> = [] {
         didSet {
             self.objectWillChange.send()
         }
@@ -24,7 +24,7 @@ class RTCManager: NSObject, ObservableObject {
         }
     }
     var sortedUids: [UInt] {
-        return [myUid] + uids.sorted() // consistently get the same order of uids
+        return uids.sorted() // consistently get the same order of uids
     }
 
     override init() {
@@ -49,17 +49,20 @@ class RTCManager: NSObject, ObservableObject {
 }
 
 extension RTCManager {
-    func setupCanvasFor(_ uiView: UIView, _ uid: UInt) {
+    func setupCanvasForRemote(_ uiView: UIView, _ uid: UInt) {
         let canvas = AgoraRtcVideoCanvas()
         canvas.uid = uid
         canvas.renderMode = .hidden
         canvas.view = uiView
+        engine.setupRemoteVideo(canvas)
+    }
 
-        if uid == myUid {
-            engine.setupLocalVideo(canvas)
-        } else {
-            engine.setupRemoteVideo(canvas)
-        }
+    func setupCanvasForLocal(_ uiView: UIView, _ uid: UInt) {
+        let canvas = AgoraRtcVideoCanvas()
+        canvas.uid = uid
+        canvas.renderMode = .hidden
+        canvas.view = uiView
+        engine.setupLocalVideo(canvas)
     }
 }
 

@@ -8,7 +8,7 @@
 import SwiftUI
 
 @main
-struct SwiftUI_Quick_ExampleApp: App {
+struct SwiftUI_Quick_ExampleApp: App { // swiftlint:disable:this type_name
     @StateObject var rtcManager = RTCManager()
 
     var body: some Scene {
