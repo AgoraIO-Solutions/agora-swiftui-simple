@@ -7,13 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		28B85297286DE68E00E30F9E /* AgoraRtcKit in Frameworks */ = {isa = PBXBuildFile; productRef = 28B85296286DE68E00E30F9E /* AgoraRtcKit */; };
 		28FEBCD1286B9DB100FF4C6F /* SwiftUI_Quick_ExampleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FEBCD0286B9DB100FF4C6F /* SwiftUI_Quick_ExampleApp.swift */; };
 		28FEBCD3286B9DB100FF4C6F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FEBCD2286B9DB100FF4C6F /* ContentView.swift */; };
 		28FEBCD5286B9DB200FF4C6F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 28FEBCD4286B9DB200FF4C6F /* Assets.xcassets */; };
 		28FEBCD8286B9DB200FF4C6F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 28FEBCD7286B9DB200FF4C6F /* Preview Assets.xcassets */; };
-		28FEBCE0286B9E4400FF4C6F /* RtcBasic in Frameworks */ = {isa = PBXBuildFile; productRef = 28FEBCDF286B9E4400FF4C6F /* RtcBasic */; };
-		28FEBCE2286B9E4400FF4C6F /* SuperResolution in Frameworks */ = {isa = PBXBuildFile; productRef = 28FEBCE1286B9E4400FF4C6F /* SuperResolution */; };
-		28FEBCE4286B9E4400FF4C6F /* VideoPreprocess in Frameworks */ = {isa = PBXBuildFile; productRef = 28FEBCE3286B9E4400FF4C6F /* VideoPreprocess */; };
 		28FEBCE6286B9E5E00FF4C6F /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FEBCE5286B9E5E00FF4C6F /* Config.swift */; };
 		28FEBCE8286B9E7000FF4C6F /* RTCManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FEBCE7286B9E7000FF4C6F /* RTCManager.swift */; };
 		28FEBCEC286BAA7200FF4C6F /* RtcView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FEBCEB286BAA7200FF4C6F /* RtcView.swift */; };
@@ -37,9 +35,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				28FEBCE2286B9E4400FF4C6F /* SuperResolution in Frameworks */,
-				28FEBCE0286B9E4400FF4C6F /* RtcBasic in Frameworks */,
-				28FEBCE4286B9E4400FF4C6F /* VideoPreprocess in Frameworks */,
+				28B85297286DE68E00E30F9E /* AgoraRtcKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -104,9 +100,7 @@
 			);
 			name = "SwiftUI Quick Example";
 			packageProductDependencies = (
-				28FEBCDF286B9E4400FF4C6F /* RtcBasic */,
-				28FEBCE1286B9E4400FF4C6F /* SuperResolution */,
-				28FEBCE3286B9E4400FF4C6F /* VideoPreprocess */,
+				28B85296286DE68E00E30F9E /* AgoraRtcKit */,
 			);
 			productName = "SwiftUI Quick Example";
 			productReference = 28FEBCCD286B9DB100FF4C6F /* SwiftUI Quick Example.app */;
@@ -137,7 +131,7 @@
 			);
 			mainGroup = 28FEBCC4286B9DB100FF4C6F;
 			packageReferences = (
-				28FEBCDE286B9E4400FF4C6F /* XCRemoteSwiftPackageReference "AgoraRtcEngine_iOS" */,
+				28B85295286DE68E00E30F9E /* XCRemoteSwiftPackageReference "AgoraRtcEngine_iOS_Beta" */,
 			);
 			productRefGroup = 28FEBCCE286B9DB100FF4C6F /* Products */;
 			projectDirPath = "";
@@ -405,31 +399,21 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		28FEBCDE286B9E4400FF4C6F /* XCRemoteSwiftPackageReference "AgoraRtcEngine_iOS" */ = {
+		28B85295286DE68E00E30F9E /* XCRemoteSwiftPackageReference "AgoraRtcEngine_iOS_Beta" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/AgoraIO/AgoraRtcEngine_iOS";
+			repositoryURL = "https://github.com/agorabuilder/AgoraRtcEngine_iOS_Beta.git";
 			requirement = {
-				branch = main;
+				branch = master;
 				kind = branch;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		28FEBCDF286B9E4400FF4C6F /* RtcBasic */ = {
+		28B85296286DE68E00E30F9E /* AgoraRtcKit */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 28FEBCDE286B9E4400FF4C6F /* XCRemoteSwiftPackageReference "AgoraRtcEngine_iOS" */;
-			productName = RtcBasic;
-		};
-		28FEBCE1286B9E4400FF4C6F /* SuperResolution */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 28FEBCDE286B9E4400FF4C6F /* XCRemoteSwiftPackageReference "AgoraRtcEngine_iOS" */;
-			productName = SuperResolution;
-		};
-		28FEBCE3286B9E4400FF4C6F /* VideoPreprocess */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 28FEBCDE286B9E4400FF4C6F /* XCRemoteSwiftPackageReference "AgoraRtcEngine_iOS" */;
-			productName = VideoPreprocess;
+			package = 28B85295286DE68E00E30F9E /* XCRemoteSwiftPackageReference "AgoraRtcEngine_iOS_Beta" */;
+			productName = AgoraRtcKit;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

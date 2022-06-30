@@ -30,17 +30,24 @@ class RTCManager: NSObject, ObservableObject {
     override init() {
         super.init()
         do {
-            engine = .sharedEngine(withAppId: try Config.value(for: "AGORA_APP_ID"), delegate: self)
+            let config = AgoraRtcEngineConfig()
+            config.appId = try Config.value(for: "AGORA_APP_ID")
+            engine = AgoraRtcEngineKit.sharedEngine(with: config, delegate: self)
         } catch {
             fatalError("Error initializing the engine \(error)")
         }
         engine.disableAudio()
         engine.enableVideo()
-        let status = engine.joinChannel(byToken: .none, channelId: "test", info: .none, uid: myUid) { _, uid, _ in
-            self.logger.info("Join success called, joined as \(uid)")
-            self.myUid = uid
-        }
+        engine.startPreview()
+        let mediaOptions = AgoraRtcChannelMediaOptions()
+        mediaOptions.channelProfile = .of((Int32)(AgoraChannelProfile.communication.rawValue))
+        mediaOptions.clientRoleType = .of((Int32)(AgoraClientRole.broadcaster.rawValue))
+        mediaOptions.publishAudioTrack = .of(true)
+        mediaOptions.publishCameraTrack = .of(true)
+        mediaOptions.autoSubscribeAudio = .of(true)
+        mediaOptions.autoSubscribeVideo = .of(true)
 
+        let status = engine.joinChannel(byToken: .none, channelId: "test", uid: myUid, mediaOptions: mediaOptions)
         if status != 0 {
             logger.error("Error joining \(status)")
         }
@@ -50,6 +57,7 @@ class RTCManager: NSObject, ObservableObject {
 
 extension RTCManager {
     func setupCanvasForRemote(_ uiView: UIView, _ uid: UInt) {
+        logger.info("Setting up remote view for uid \(uid)")
         let canvas = AgoraRtcVideoCanvas()
         canvas.uid = uid
         canvas.renderMode = .hidden
@@ -58,6 +66,7 @@ extension RTCManager {
     }
 
     func setupCanvasForLocal(_ uiView: UIView, _ uid: UInt) {
+        logger.info("Setting up local view for uid \(uid)")
         let canvas = AgoraRtcVideoCanvas()
         canvas.uid = uid
         canvas.renderMode = .hidden
@@ -69,6 +78,10 @@ extension RTCManager {
 extension RTCManager: AgoraRtcEngineDelegate {
     func rtcEngine(_ engine: AgoraRtcEngineKit, didOccurError errorCode: AgoraErrorCode) {
         logger.error("Error \(errorCode.rawValue)")
+    }
+
+    func rtcEngine(_ engine: AgoraRtcEngineKit, didOccurWarning warningCode: AgoraWarningCode) {
+        logger.warning("Warning \(warningCode.rawValue)")
     }
 
     func rtcEngine(_ engine: AgoraRtcEngineKit, didJoinChannel channel: String, withUid uid: UInt, elapsed: Int) {
